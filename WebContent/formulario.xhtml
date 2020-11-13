@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- En este caso, "composition indica el layout con que trabaja esta pagina" -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/plantillas/plantilla.xhtml">
+
+	<ui:define name="body">
+		<h2>#{texto.registro_titulo}</h2>
+		<h:form styleClass="form">
+			<h:panelGrid columns="2" styleClass="table">
+				<!-- En este caso, el atributo value lee el texto desde un Bundle (i18n)-->
+				<h:outputLabel value="#{texto.campo_nombre}" />
+				
+				<!-- En este caso, el atributo value invoca a las propiedades del ManagedBean -->
+				<h:inputText value="#{formulario.empleado.nombre}" />
+
+				<h:outputLabel value="#{texto.campo_apellido}" />
+				<h:inputText value="#{formulario.empleado.apellido}" />
+
+				<h:outputLabel value="#{texto.campo_area}" />
+				<h:inputText value="#{formulario.empleado.area}" />
+
+				<h:outputLabel value="#{texto.campo_edad}" />
+				<h:inputText value="#{formulario.empleado.edad}" />
+
+				<h:outputLabel value="#{texto.campo_fecha_ingreso}" />
+				<h:inputText value="#{formulario.empleado.fechaIngreso}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:inputText>
+
+				<h:outputLabel value="#{texto.campo_casillero}" />
+				<h:selectOneRadio value="#{formulario.empleado.casillero.codigo}">
+					<f:selectItems value="#{listado.casilleros}" />
+				</h:selectOneRadio>
+
+				<h:outputLabel value="#{texto.campo_cargo}" />
+				<h:selectOneListbox value="#{formulario.empleado.cargo.codigo}"
+					size="1">
+					<f:selectItems value="#{listado.cargos}" />
+				</h:selectOneListbox>
+
+				<h:outputLabel value="#{texto.campo_habilitado}" />
+				<h:selectBooleanCheckbox value="#{formulario.empleado.estado}" />
+
+				<!-- En este caso, la acción ejecuta al método del ManagedBean -->
+				<h:commandButton value="#{texto.boton_procesar}" action="#{formulario.procesar}" />
+				
+				<!-- En este caso, la acción se llama igual que la pagina final.xhtml -->
+				<h:commandButton value="#{texto.boton_continuar}" action="final" />
+			</h:panelGrid>
+		</h:form>
+
+		<!-- En este caso, muestra todos los mensajes almacenados -->
+		<h:messages />
+	</ui:define>
+</ui:composition>

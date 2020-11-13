@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- En este caso, "composition indica el layout con que trabaja esta pagina" -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/plantillas/plantilla.xhtml">
+	
+	<ui:define name="body">
+		<!-- Añadir un formulario para seleccionar idioma -->
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputText value="Idioma" />
+				<h:selectOneMenu value="#{idioma.idioma}" onchange="submit()">
+					<f:selectItem itemValue="" itemLabel="Seleccionar" />
+					<f:selectItem itemValue="en" itemLabel="English" />
+					<f:selectItem itemValue="es" itemLabel="Español" />
+				</h:selectOneMenu>
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- En este caso, "composition indica el layout con que trabaja esta pagina" -->
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/plantillas/plantilla.xhtml">
+
+	<ui:define name="body">
+		<h2>#{texto.resultado_titulo}</h2>
+		<h:form styleClass="form">
+			<h:panelGrid columns="2" styleClass="table">
+				<!-- En este caso, el atributo value lee el texto desde un Bundle (i18n) -->
+				<h:outputLabel value="#{texto.campo_nombre}" />
+				<!-- En este caso, el atributo value invoca a la propiedad del ManagedBean -->
+				<h:outputText value="#{formulario.empleado.nombre}" />
+	
+				<h:outputLabel value="#{texto.campo_apellido}" />
+				<h:outputText value="#{formulario.empleado.apellido}" />
+	
+				<h:outputLabel value="#{texto.campo_area}" />
+				<h:outputText value="#{formulario.empleado.area}" />
+	
+				<h:outputLabel value="#{texto.campo_edad}" />
+				<h:outputText value="#{formulario.empleado.edad}" />
+	
+				<h:outputLabel value="#{texto.campo_fecha_ingreso}" />
+				<h:outputText value="#{formulario.empleado.fechaIngreso}">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</h:outputText>
+	
+				<h:outputLabel value="#{texto.campo_casillero}" />
+				<h:selectOneRadio value="#{formulario.empleado.casillero.codigo}"
+					disabled="true">
+					<f:selectItems value="#{listado.casilleros}" />
+				</h:selectOneRadio>
+	
+				<h:outputLabel value="#{texto.campo_cargo}" />
+				<h:selectOneListbox value="#{formulario.empleado.cargo.codigo}"
+					size="1" disabled="true">
+					<f:selectItems value="#{listado.cargos}" />
+				</h:selectOneListbox>
+	
+				<h:outputLabel value="#{texto.campo_habilitado}" />
+				<h:selectBooleanCheckbox value="#{formulario.empleado.estado}" disabled="true" />
+			</h:panelGrid>
+		
+			<!-- En este caso, muestra todos los mensajes almacenados -->
+			<h:messages />
+				
+			<!-- En este caso, la acción ejecuta al método del ManagedBean -->
+			<h:commandButton value="#{texto.boton_listado}" action="#{formulario.listar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
